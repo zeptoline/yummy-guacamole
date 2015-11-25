@@ -45,17 +45,17 @@ public class Performance {
 	 * @return the accuracy of the recognition system.
 	 */
 	public static double evaluate (List<String> goldLang, List<String> hypLang) {
-		if (goldLang.size() != hypLang.size()) {
+		/*if (goldLang.size() != hypLang.size()) {
 			System.err.println("Error: gold and hyp lists must have the same number of sentences");
 			return -1.0;
-		}
+		}*/
 		
 		Double correct = 0.0;
 		for (int i = 0 ; i < goldLang.size() ; i++ ) {
 			if (goldLang.get(i).equalsIgnoreCase(hypLang.get(i))) 
 				correct++;
 			//System.out.println(goldLang.get(i) + " (=== ?)" + hypLang.get(i));
-			System.out.println((i / goldLang.size()) +"%");
+			//System.out.println((i / goldLang.size()) +"%");
 		}
 		return (double) correct/ goldLang.size();	
 	}
