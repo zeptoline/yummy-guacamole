@@ -1,6 +1,7 @@
 package langModel;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -20,8 +21,7 @@ public class NgramUtil {
 	 * @return the number of words of the given sequence.
 	 */
 	public static int getSequenceSize (String sequence) {
-		//TODO
-		return -1;
+		return sequence.split("\\s+").length;
 	}
 
 	
@@ -52,8 +52,19 @@ public class NgramUtil {
 	 * @return a list of generated n-grams from the sentence.
 	 */
 	public static List<String> generateNgrams (String sentence, int minOrder, int maxOrder) {
-		//TODO
-		return null;
+		List<String> retList = new ArrayList<String>();
+		String[] listMots = sentence.split("\\s+");
+		
+		for(int i = minOrder; i <= maxOrder; i++) {
+			for(int j = 0; j <= listMots.length - i; j++) {
+				String mot = listMots[j];
+				for (int k = 1; k < i; k++) {
+					mot = mot + " " +listMots[j+k];	
+				}
+				retList.add(mot);
+			}
+		}
+		return retList;
 	}
 
 

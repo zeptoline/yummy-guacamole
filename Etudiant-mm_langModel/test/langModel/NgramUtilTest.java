@@ -1,6 +1,9 @@
 package langModel;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Rule;
@@ -48,7 +51,17 @@ public class NgramUtilTest {
 	 */
 	@Test
 	public void testGenerateNgrams() {
-		fail("Not yet implemented");
+	
+		System.out.println(NgramUtil.generateNgrams("a b c", 1, 2));
+		// on the left the expected value and on the right the actual one 
+		// (i.e. the one returned by your method)
+		ArrayList<String> test = new ArrayList();
+		test.add("a");
+		test.add("b");
+		test.add("c");
+		test.add("a b");
+		test.add("b c");
+		assertEquals(test, NgramUtil.generateNgrams("a b c", 1, 2));
 	}
 
 	
