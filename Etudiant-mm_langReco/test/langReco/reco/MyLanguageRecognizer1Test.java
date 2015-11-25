@@ -21,9 +21,9 @@ public class MyLanguageRecognizer1Test {
 
 	@Test
 	public void testRecognizeSentenceLanguage() {
-		MyLanguageRecognizer1 lr = new MyLanguageRecognizer1();
+		MyLanguageRecognizer1 lr = new MyLanguageRecognizer1("lm/fichConfig_bigram-100.txt");
 		lr.loadNgramCountPath4Lang("lm/fichConfig_bigram-100.txt");
-		assertEquals(lr.recognizeSentenceLanguage("<s> estoy también"), "es");
+		assertEquals(lr.recognizeSentenceLanguage("<s> turklāt , lai vienkāršotu procesu , priekšlikumā ir noteikts tikai viens jauns pārbaudes veids un nekādā veidā nav pieprasīts dalībvalstīm mainīt to administratīvās sistēmas . </s>"), "lv");
 	}
 
 }

@@ -5,41 +5,50 @@ import java.util.HashMap;
 import java.util.Set;
 
 import langModel.MyLaplaceLanguageModel;
-import langModel.MyNaiveLanguageModel;
 import langModel.MyNgramCounts;
 
 public class MyLanguageRecognizer1 extends LanguageRecognizer{
-
-	@Override
-	public String recognizeSentenceLanguage(String sentence) {
+	HashMap<String, MyLaplaceLanguageModel> lms = new HashMap<String, MyLaplaceLanguageModel>(); 
+	
+	public MyLanguageRecognizer1(String nGramPath){
+		super();
+		this.loadNgramCountPath4Lang(nGramPath);
 		
-		HashMap<String, Double> res = new HashMap<String, Double>();     
-			
-		for (String l : this.getLanguages()) {
-			MyNaiveLanguageModel lm = new MyNaiveLanguageModel();
+		
+		for (String l : this.getLang()) {
+			MyLaplaceLanguageModel lm = new MyLaplaceLanguageModel();
 			MyNgramCounts ngCounts = new MyNgramCounts();
+			
 			Collection<String> nGram = this.getNgramCountPath(l);
-			lm.setNgramCounts(ngCounts);
+			//System.out.println("l : " + l + ", " +  nGram);
 			
 			for (String path :  nGram) {
 				ngCounts.readNgramCountsFile(path);
 			} //Y faudrait faire au cas où y a plusieurs modèles par langues
 			lm.setNgramCounts(ngCounts);
-			res.put(l, lm.getSentenceProb(sentence));
+			lms.put(l, lm);
 		}
+	}
+	
+	@Override
+	public String recognizeSentenceLanguage(String sentence) {
 		
-		Set<String> langs = res.keySet();
+		Set<String> lmsKeys = lms.keySet();
+		//System.out.println("test : " + lms.keySet());
 		double resProb = 0;
 		String resLang = null;
-		for (String key : langs) {
-			System.out.println(resProb);
-			if (res.get(key) > resProb) { 
-				resProb = res.get(key);
-				resLang = key;
-				
+		for (String l : lmsKeys) {
+			//System.out.println("lang : " + l + ", prob : " + lms.get(l).getSentenceProb(sentence));
+			if (lms.get(l).getSentenceProb(sentence) > resProb) {
+				resProb = lms.get(l).getSentenceProb(sentence);
+				resLang = l;
 			}
 		}
 		
+		/*double seuil = 0.0000001;
+		if (resProb < seuil) 
+			resLang = "unk";
+		*/
 		return resLang;
 	}
 	

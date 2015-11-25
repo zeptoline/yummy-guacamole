@@ -13,15 +13,15 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
-public class MyLanguageRecognizer2TestPerformance {
+public class MyLanguageRecognizer1TestPerformance {
 
-	public MyLanguageRecognizer2TestPerformance() {
+	public MyLanguageRecognizer1TestPerformance() {
 	}
 
 	@Test
 	public void testBaselineLanguageRecognizer() {
-		String goldSentPath = "data/gold/gold-sent.txt";
-		String goldLangPath = "data/gold/gold-lang.txt";
+		String goldSentPath = "data/gold/gold-sent2.txt";
+		String goldLangPath = "data/gold/gold-lang2.txt";
 
 		List<String> lang = new ArrayList<String>();
 		/*lang.add("fr");
@@ -29,7 +29,7 @@ public class MyLanguageRecognizer2TestPerformance {
 		
 		
 		
-		MyLanguageRecognizer2 baseline = new MyLanguageRecognizer2("lm/fichConfig_bigram-100.txt");
+		MyLanguageRecognizer1 baseline = new MyLanguageRecognizer1("lm/fichConfig_bigram-100.txt");
 		//baseline.loadNgramCountPath4Lang("lm/fichConfig_bigram-100.txt");
 		// or use the following if you want to consider all the languages
 		// LanguageRecognizer baseline = new BaselineLanguageRecognizer();

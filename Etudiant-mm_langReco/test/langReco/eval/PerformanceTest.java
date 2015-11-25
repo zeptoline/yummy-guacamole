@@ -8,8 +8,6 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
-import langReco.reco.BaselineLanguageRecognizer;
-import langReco.reco.LanguageRecognizer;
 
 
 /**
