@@ -8,7 +8,7 @@ import langModel.MiscUtil;
 
 
 /**
- * Class Performance: class to compute the performance of a recognition system.
+ * Class Performance: class ton compute the performance of a recognition system.
  * @author N. Hernandez and S. Quiniou (2015)
  *
  */
@@ -51,10 +51,12 @@ public class Performance {
 		}
 		
 		Double correct = 0.0;
-		for (int i = 0 ; i < goldLang.size() ; i++ ) 
+		for (int i = 0 ; i < goldLang.size() ; i++ ) {
 			if (goldLang.get(i).equalsIgnoreCase(hypLang.get(i))) 
 				correct++;
-
+			//System.out.println(goldLang.get(i) + " (=== ?)" + hypLang.get(i));
+			System.out.println((i / goldLang.size()) +"%");
+		}
 		return (double) correct/ goldLang.size();	
 	}
 	

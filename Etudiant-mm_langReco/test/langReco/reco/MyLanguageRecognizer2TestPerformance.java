@@ -1,29 +1,22 @@
 package langReco.reco;
 
-
 import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import langReco.eval.Performance;
+
+import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
 
-import langReco.eval.Performance;
-import langModel.LanguageModel;
-import langModel.MyLaplaceLanguageModel;
-import langModel.MyNgramCounts;
-import langModel.NgramCounts;
+public class MyLanguageRecognizer2TestPerformance {
 
-
-/**
- * Class BaselineLanguageRecognizerTest: JUnit Test class to evaluate the baseline recognition system.
- * 
- * @author N. Hernandez and S. Quiniou (2015)
- *
- */
-public class BaselineLanguageRecognizerTest {
+	public MyLanguageRecognizer2TestPerformance() {
+	}
 
 	@Test
 	public void testBaselineLanguageRecognizer() {
@@ -36,11 +29,12 @@ public class BaselineLanguageRecognizerTest {
 		
 		
 		
-		LanguageRecognizer baseline = new BaselineLanguageRecognizer(lang);
+		MyLanguageRecognizer2 baseline = new MyLanguageRecognizer2();
+		baseline.loadNgramCountPath4Lang("lm/fichConfig_bigram-100.txt");
 		// or use the following if you want to consider all the languages
 		// LanguageRecognizer baseline = new BaselineLanguageRecognizer();
 
-		String hypLangFilePath = "/tmp/hyp";
+		String hypLangFilePath = "data/test/hyp";
 		baseline.recognizeFileLanguage(goldSentPath, hypLangFilePath);
 		System.out.printf("System performance = %f\n", Performance.evaluate(goldLangPath, hypLangFilePath));
 	}
@@ -55,5 +49,4 @@ public class BaselineLanguageRecognizerTest {
 	{
 		System.out.println("\n=== " + name.getMethodName() + " =====================");
 	}
-
 }

@@ -2,6 +2,7 @@ package langReco.reco;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,7 +50,7 @@ public abstract class LanguageRecognizer {
 		lang.add("nl");
 		lang.add("pt");
 		lang.add("sk");
-		lang.add("unk");
+		//lang.add("unk");
 		
 		langNgramCountMap = new HashMap<String,Map<String,String>>();
 	}
@@ -102,8 +103,8 @@ public abstract class LanguageRecognizer {
 	 * @param lang: the language to consider.
 	 * @return the set of language model file paths for the given language.
 	 */
-	protected Set<String> getNgramCountPath(String lang) {
-		return (Set<String>) getLangNgramCountMap().get(lang).values();
+	protected Collection<String> getNgramCountPath(String lang) {
+		return getLangNgramCountMap().get(lang).values();
 	}
 	
 	
@@ -145,7 +146,7 @@ public abstract class LanguageRecognizer {
 	 * This method initialized the langNgramCountMap attribute with the language models used in the 
 	 * recognition system.
 	 * 
-	 * @param configFile: the file path of the configuration file containing the information 
+	 * @param configFile: the file path of the cloadNgramCountPath4Langonfiguration file containing the information 
 	 * on the language models (language, name and file path).
 	 */
 	public void loadNgramCountPath4Lang (String configFile) {

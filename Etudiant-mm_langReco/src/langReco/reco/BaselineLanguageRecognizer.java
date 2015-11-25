@@ -19,8 +19,8 @@ public class BaselineLanguageRecognizer extends LanguageRecognizer {
 	 */
 	public BaselineLanguageRecognizer(List<String> lang) {
 		super();
-		getLang().clear();
-		getLang().addAll(lang);
+		//getLang().clear();
+		//getLang().addAll(lang);
 	}
 
 	

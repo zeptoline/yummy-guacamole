@@ -28,7 +28,7 @@ public class EstimateAndUseLanguageModelExampleTest {
 		String trainFrFilePath = "data/train/sample-fr.txt";
 		String trainEnFilePath = "data/train/sample-en.txt";
 		
-		String lmFrFilePath = "lm/sample-fr_unigrams.lm";
+		String lmFrFilePath  = "lm/sample-fr_unigrams.lm";
 		String lmEnFilePath = "lm/sample-en_unigrams.lm";
 
 		int order = 1;

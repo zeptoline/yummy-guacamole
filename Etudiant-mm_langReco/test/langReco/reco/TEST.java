@@ -23,7 +23,7 @@ import langModel.NgramCounts;
  * @author N. Hernandez and S. Quiniou (2015)
  *
  */
-public class BaselineLanguageRecognizerTest {
+public class TEST {
 
 	@Test
 	public void testBaselineLanguageRecognizer() {
@@ -36,7 +36,7 @@ public class BaselineLanguageRecognizerTest {
 		
 		
 		
-		LanguageRecognizer baseline = new BaselineLanguageRecognizer(lang);
+		LanguageRecognizer baseline = new MyLanguageRecognizer1();
 		// or use the following if you want to consider all the languages
 		// LanguageRecognizer baseline = new BaselineLanguageRecognizer();
 
