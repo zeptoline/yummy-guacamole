@@ -82,9 +82,15 @@ public class NgramUtil {
 	 * @return history of the given n-gram (the length of the history is order-1).  
 	 */
 	public static String getHistory (String ngram, int order) {
-		//TODO
-		
-		return "";
+		if (getSequenceSize(ngram) < order || order < 2) {
+			return "ko";
+		} 
+		String[] split = ngram.split("\\s+");
+		String retS = null;
+		for (int i = split.length-2; i >= split.length - order; i--) {
+			retS = (retS == null) ? split[i] : split [i] + " " + retS;
+		}
+		return retS;
 	}
 
 	
@@ -104,8 +110,25 @@ public class NgramUtil {
 	 * @return the list of n-grams constructed from the sentence.
 	 */
 	public static List<String> decomposeIntoNgrams (String sentence, int order) {
-		//TODO
-		return null;
+		List<String> retList = new ArrayList<String>();
+		String[] listMots = sentence.split("\\s+");
+		
+		for(int i = 1; i < order; i++) {
+			String mot = null;
+			for (int k = 0; k < i; k++) {
+				mot = (mot == null) ? listMots[k] : mot + " " +listMots[k];	
+			}
+			retList.add(mot);
+		}
+		for (int j = 0; j <= listMots.length- order; j++){
+			String mot = listMots[j];
+			for (int k = 1; k < order; k++) {
+				mot = mot + " " +listMots[j+k];	
+			}
+			retList.add(mot);
+		}
+		
+		return retList;
 	}
 
 }

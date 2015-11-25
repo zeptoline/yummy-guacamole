@@ -55,7 +55,7 @@ public class NgramUtilTest {
 		System.out.println(NgramUtil.generateNgrams("a b c", 1, 2));
 		// on the left the expected value and on the right the actual one 
 		// (i.e. the one returned by your method)
-		ArrayList<String> test = new ArrayList();
+		ArrayList<String> test = new ArrayList<String>();
 		test.add("a");
 		test.add("b");
 		test.add("c");
@@ -70,7 +70,9 @@ public class NgramUtilTest {
 	 */
 	@Test
 	public void testGetHistory() {
-		fail("Not yet implemented");
+		System.out.println(NgramUtil.getHistory("a b c", 3));
+	
+		assertEquals("a b", NgramUtil.getHistory("a b c", 3));
 	}
 
 	
@@ -79,7 +81,9 @@ public class NgramUtilTest {
 	 */
 	@Test
 	public void testDecomposeIntoNgrams() {
-		fail("Not yet implemented");
+		System.out.println(NgramUtil.decomposeIntoNgrams("a b c d e f g", 3));
+	
+		assertEquals("[a, a b, a b c, b c d, c d e, d e f, e f g]", NgramUtil.decomposeIntoNgrams("a b c d e f g", 3).toString());
 	}
 	
 	
