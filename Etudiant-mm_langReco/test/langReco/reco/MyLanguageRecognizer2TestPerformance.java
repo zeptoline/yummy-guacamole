@@ -29,8 +29,8 @@ public class MyLanguageRecognizer2TestPerformance {
 		
 		
 		
-		MyLanguageRecognizer2 baseline = new MyLanguageRecognizer2();
-		baseline.loadNgramCountPath4Lang("lm/fichConfig_bigram-100.txt");
+		MyLanguageRecognizer2 baseline = new MyLanguageRecognizer2("lm/fichConfig_bigram-100.txt");
+		//baseline.loadNgramCountPath4Lang("lm/fichConfig_bigram-100.txt");
 		// or use the following if you want to consider all the languages
 		// LanguageRecognizer baseline = new BaselineLanguageRecognizer();
 
