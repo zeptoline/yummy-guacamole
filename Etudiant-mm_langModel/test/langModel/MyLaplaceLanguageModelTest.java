@@ -4,27 +4,27 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class MyNaiveLanguageModelTest {
+public class MyLaplaceLanguageModelTest {
 
 	@Test
 	public void testGetNgramProb() {
-		MyNaiveLanguageModel lm = new MyNaiveLanguageModel();
+		MyLaplaceLanguageModel lm = new MyLaplaceLanguageModel();
 		MyNgramCounts nc = new MyNgramCounts();
 		nc.readNgramCountsFile("lm/bigram-100-train-en.lm");
 		lm.setNgramCounts(nc);
-		Double res = 0.0472972972972973;
+		Double res = 0.008519701810436636;
 		assertEquals(res,lm.getNgramProb("the vote"));
 	}
 
+
 	@Test
 	public void testGetSentenceProb() {
-		MyNaiveLanguageModel lm = new MyNaiveLanguageModel();
+		MyLaplaceLanguageModel lm = new MyLaplaceLanguageModel();
 		MyNgramCounts nc = new MyNgramCounts();
 		nc.readNgramCountsFile("lm/bigram-100-train-en.lm");
 		lm.setNgramCounts(nc);
 		
-		Double res = 5.7093919497573504E-5;
+		Double res = 7.3122511714225256E-9;
 		assertEquals(res,lm.getSentenceProb("the vote in accordance"));
 	}
-
 }

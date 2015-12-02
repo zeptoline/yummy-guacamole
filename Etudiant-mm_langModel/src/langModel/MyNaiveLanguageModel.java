@@ -77,7 +77,6 @@ public class MyNaiveLanguageModel implements LanguageModel {
 		for (String nep : NgramUtil.decomposeIntoNgrams(sentence, lmo)) {
 			mult = mult * this.getNgramProb(nep);
 		}
-
 		return mult;
 	}
 

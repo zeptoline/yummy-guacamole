@@ -12,7 +12,28 @@ public class MyLaplaceLanguageModel extends MyNaiveLanguageModel {
 
 	@Override
 	public Double getNgramProb(String ngram) {
-		//TODO
-		return 0.0;
+
+		Double nepnep = 0.0;
+		
+		double occu = ngramCounts.getCounts(ngram) + 1;
+		int hist_size = getLMOrder();
+		double somme;
+		
+		if (NgramUtil.getSequenceSize(ngram) == 1) {
+			somme = this.getVocabularySize();
+		} else{
+			String histo = NgramUtil.getHistory(ngram, hist_size);
+			 somme = ngramCounts.getCounts(histo);
+			for (int i = hist_size-1; i > 2 ; i--) {
+				histo = NgramUtil.getHistory(histo, i);
+				somme = somme + ngramCounts.getCounts(histo);
+			}
+		}
+		
+		somme = somme + this.getVocabularySize();
+		
+		nepnep = Double.valueOf((occu /somme));
+
+		return nepnep;
 	}
 }
