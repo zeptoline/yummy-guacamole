@@ -71,6 +71,7 @@ public class NgramUtilTest {
 	@Test
 	public void testGetHistory() {
 		System.out.println(NgramUtil.getHistory("a b c", 3));
+		System.out.println(NgramUtil.getHistory("il fait beau aujourdhui ahlalala", 5));
 	
 		assertEquals("a b", NgramUtil.getHistory("a b c", 3));
 	}

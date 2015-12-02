@@ -47,20 +47,38 @@ public class MyNaiveLanguageModel implements LanguageModel {
 
 	@Override
 	public Double getNgramProb(String ngram) {
-		double nepnep = 0.0;
+		Double nepnep = 0.0;
 		
+		double occu = ngramCounts.getCounts(ngram);
+		int hist_size = getLMOrder();
+		double somme;
 		
+		if (NgramUtil.getSequenceSize(ngram) == 1) {
+			somme = this.getVocabularySize();
+		} else{
+			String histo = NgramUtil.getHistory(ngram, hist_size);
+			 somme = ngramCounts.getCounts(histo);
+			for (int i = hist_size-1; i > 2 ; i--) {
+				histo = NgramUtil.getHistory(histo, i);
+				somme = somme + ngramCounts.getCounts(histo);
+			}
+		}
+
+		nepnep = Double.valueOf((occu /somme));
+
 		
 		return nepnep;
 	}
 
 	@Override
 	public Double getSentenceProb(String sentence) {
-		double nepnep = 0.0;
-		
-		
-		
-		return nepnep;
+		double mult = 1;
+		int lmo = getLMOrder();
+		for (String nep : NgramUtil.decomposeIntoNgrams(sentence, lmo)) {
+			mult = mult * this.getNgramProb(nep);
+		}
+
+		return mult;
 	}
 
 }
