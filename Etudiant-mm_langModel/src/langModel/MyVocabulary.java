@@ -1,6 +1,8 @@
 package langModel;
 
+import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 
 /**
@@ -20,55 +22,64 @@ public class MyVocabulary implements Vocabulary {
 	 * Constructor.
 	 */
 	public MyVocabulary(){
-		//TODO
+		vocabulary = new TreeSet<String>();
+		
 	}
 	
 	
 	@Override
 	public int getSize() {
-		// TODO Auto-generated method stub
-		return 0;
+		return vocabulary.size();
 	}
 
 	@Override
 	public Set<String> getWords() {
-		// TODO Auto-generated method stub
-		return null;
+		return (Set<String>) vocabulary;
 	}
 
 	@Override
 	public boolean contains(String word) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean ret = (vocabulary.contains(word)) ? true : false;
+		return ret;
 	}
 
 	@Override
 	public void addWord(String word) {
-		// TODO Auto-generated method stub
-		
+		vocabulary.add(word);		
 	}
 
 	@Override
 	public void removeWord(String word) {
-		// TODO Auto-generated method stub
-		
+		vocabulary.remove(word);		
 	}
 
 	@Override
 	public void scanNgramSet(Set<String> ngramSet) {
-		// TODO Auto-generated method stub
+		for (String string : ngramSet) {
+			String[] sep = string.split("\\s+");
+			for (String string2 : sep) {
+				addWord(string2);
+			}
+		}
 		
 	}
 
 	@Override
 	public void readVocabularyFile(String filePath) {
-		// TODO Auto-generated method stub
+		List<String> nep = MiscUtil.readTextFileAsStringList(filePath);
+		for (String string : nep) {
+			addWord(string);
+		}
 		
 	}
 
 	@Override
 	public void writeVocabularyFile(String filePath) {
-		// TODO Auto-generated method stub
+		MiscUtil.writeFile("", filePath, false);
+		for (String string : vocabulary) {
+			MiscUtil.writeFile(string, filePath, true);
+			
+		}
 		
 	}
 

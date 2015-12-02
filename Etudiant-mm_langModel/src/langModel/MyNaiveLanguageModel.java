@@ -24,38 +24,43 @@ public class MyNaiveLanguageModel implements LanguageModel {
 	 * Constructor.
 	 */
 	public MyNaiveLanguageModel(){
-		//TODO
+		ngramCounts = new MyNgramCounts();
+		vocabulary = new MyVocabulary();
 	}
 	
 
 	@Override
 	public void setNgramCounts(NgramCounts ngramCounts) {
-		// TODO Auto-generated method stub
-		
+		this.ngramCounts = ngramCounts;
+		vocabulary.scanNgramSet(ngramCounts.getNgrams());
 	}
 
 	@Override
 	public int getLMOrder() {
-		// TODO Auto-generated method stub
-		return 0;
+		return ngramCounts.getMaximalOrder();
 	}
 
 	@Override
 	public int getVocabularySize() {
-		// TODO Auto-generated method stub
-		return 0;
+		return vocabulary.getSize();
 	}
 
 	@Override
 	public Double getNgramProb(String ngram) {
-		// TODO Auto-generated method stub
-		return null;
+		double nepnep = 0.0;
+		
+		
+		
+		return nepnep;
 	}
 
 	@Override
 	public Double getSentenceProb(String sentence) {
-		// TODO Auto-generated method stub
-		return null;
+		double nepnep = 0.0;
+		
+		
+		
+		return nepnep;
 	}
 
 }
