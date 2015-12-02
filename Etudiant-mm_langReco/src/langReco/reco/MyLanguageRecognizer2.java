@@ -49,9 +49,12 @@ public class MyLanguageRecognizer2 extends LanguageRecognizer{
 		}
 		
 		double seuil = 0.0000001;
-		System.out.println(resProb / minProb);
+		System.out.println("ResProb : " + resProb );
 		//resProb / minProb doit être petit pour unknown
 		//Attention, plus la phrase est grande, plus resProb / minProb est grand
+		
+		System.out.println("LMOrder : " + lms.get(resLang).getLMOrder());
+		System.out.println("NgramProb : " + lms.get(resLang).getNgramProb(sentence));
 		
 		return resLang;
 	}
