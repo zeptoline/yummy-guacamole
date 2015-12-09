@@ -21,7 +21,7 @@ public class MyLanguageRecognizer2Test {
 
 	@Test
 	public void testRecognizeSentenceLanguage() {
-		MyLanguageRecognizer2 lr = new MyLanguageRecognizer2("lm/fichConfig_bigram-100.txt");
+		MyLanguageRecognizer2 lr = new MyLanguageRecognizer2("lm/bigram-100-train-en.lm");
 		lr.loadNgramCountPath4Lang("lm/fichConfig_bigram-100.txt");
 		assertEquals(lr.recognizeSentenceLanguage("<s> wir erwarten aber von allen staaten der</s>"), "de");
 	}
