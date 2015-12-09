@@ -35,12 +35,12 @@ public class MyLanguageRecognizer2 extends LanguageRecognizer{
 		
 		Set<String> lmsKeys = lms.keySet();
 		//System.out.println("test : " + lms.keySet());
-		double resProb = 0, minProb = 1;
+		double maxProb = 0, minProb = 1;
 		String resLang = null;
 		for (String l : lmsKeys) {
 			//System.out.println("lang : " + l + ", prob : " + lms.get(l).getSentenceProb(sentence));
-			if (lms.get(l).getSentenceProb(sentence) > resProb) {
-				resProb = lms.get(l).getSentenceProb(sentence);
+			if (lms.get(l).getSentenceProb(sentence) > maxProb) {
+				maxProb = lms.get(l).getSentenceProb(sentence);
 				resLang = l;
 			}
 			if (lms.get(l).getSentenceProb(sentence) < minProb) {
@@ -49,9 +49,12 @@ public class MyLanguageRecognizer2 extends LanguageRecognizer{
 		}
 		
 		double seuil = 0.0000001;
-		System.out.println("ResProb : " + resProb );
+		System.out.println("ResProb : " + maxProb );
 		//resProb / minProb doit être petit pour unknown
 		//Attention, plus la phrase est grande, plus resProb / minProb est grand
+		if ((minProb * 100) / maxProb < 20)
+			resLang = "unk";
+		
 		
 		System.out.println("LMOrder : " + lms.get(resLang).getLMOrder());
 		System.out.println("NgramProb : " + lms.get(resLang).getNgramProb(sentence));
