@@ -50,7 +50,7 @@ public abstract class LanguageRecognizer {
 		lang.add("nl");
 		lang.add("pt");
 		lang.add("sk");
-		//lang.add("unk");
+		lang.add("unk");
 		
 		langNgramCountMap = new HashMap<String,Map<String,String>>();
 	}

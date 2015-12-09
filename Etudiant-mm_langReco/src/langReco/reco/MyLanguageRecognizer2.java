@@ -1,7 +1,8 @@
 package langReco.reco;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Set;
 
 import langModel.MyLaplaceLanguageModel;
@@ -19,8 +20,21 @@ public class MyLanguageRecognizer2 extends LanguageRecognizer{
 			MyLaplaceLanguageModel lm = new MyLaplaceLanguageModel();
 			MyNgramCounts ngCounts = new MyNgramCounts();
 			
-			Collection<String> nGram = this.getNgramCountPath(l);
+			//LinkedList<String> nGram = new LinkedList<String>(this.getNgramCountPath(l));
 			//System.out.println("l : " + l + ", " +  nGram);
+			
+			ArrayList<String>nGram = new ArrayList<String>();
+			nGram.add("cs");
+			nGram.add("de");
+			nGram.add("en");
+			nGram.add("es");
+			nGram.add("et");
+			nGram.add("it");
+			nGram.add("lv");
+			nGram.add("nl");
+			nGram.add("pt");
+			nGram.add("sk");
+			nGram.add("unk");
 			
 			for (String path :  nGram) {
 				ngCounts.readNgramCountsFile(path);
