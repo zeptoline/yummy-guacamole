@@ -16,7 +16,7 @@ import java.util.List;
 /**
  * Class MiscUtil: class containing miscellaneous functions to deal with files and directories.
  * 
- * @author N. Hernandez and S. Quiniou (2015)
+ * @author Cédric Berland & Nathan Maraval (2015)
  *
  */
 public class MiscUtil {

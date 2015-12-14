@@ -5,7 +5,7 @@ package langModel;
  * Class MyLaplaceLanguageModel: class inheriting the class MyNaiveLanguageModel by creating 
  * a n-gram language model using a Laplace smoothing.
  * 
- * @author ... (2015)
+ * @author Cédric Berland & Nathan Maraval (2015)
  *
  */
 public class MyLaplaceLanguageModel extends MyNaiveLanguageModel {

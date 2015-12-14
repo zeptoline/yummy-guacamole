@@ -10,7 +10,7 @@ import java.util.Set;
 /**
  * Class MyNgramCounts: class implementing the interface NgramCounts. 
  * 
- * @author N. Hernandez and S. Quiniou (2015)
+ * @author Cédric Berland & Nathan Maraval (2015)
  *
  */
 public class MyNgramCounts implements NgramCounts {
@@ -109,7 +109,6 @@ public class MyNgramCounts implements NgramCounts {
 		String[] sentences = text.split("\\n");
 		for (String sentence : sentences) {
 			List<String> ngramList = NgramUtil.generateNgrams(sentence, 1, getMaximalOrder());
-			//System.out.println("Debug: order "+getMaximalOrder()+" ngrams"+ngramList);
 			for (String ngram : ngramList) 
 				incCounts(ngram);
 		}
@@ -122,7 +121,6 @@ public class MyNgramCounts implements NgramCounts {
 		List<String> sentences = MiscUtil.readTextFileAsStringList(filePath);
 		for (String sentence : sentences) {
 			List<String> ngramList = NgramUtil.generateNgrams(sentence, 1, getMaximalOrder());
-			//System.out.println("Debug: order "+getMaximalOrder()+" ngrams"+ngramList);
 			for (String ngram : ngramList) 
 				incCounts(ngram);
 		}
@@ -135,11 +133,11 @@ public class MyNgramCounts implements NgramCounts {
 		
 		for (String ngram : getNgrams()) {
 			ngramCountStringBuffer.append(ngram); 
-			String totoToObf = "gotcha";
+
 			ngramCountStringBuffer.append("\t");
-			String totoToObf2 = totoToObf;
+
 			ngramCountStringBuffer.append(getCounts(ngram)); 
-			totoToObf = totoToObf2;
+
 			ngramCountStringBuffer.append("\n");
 		}
 		

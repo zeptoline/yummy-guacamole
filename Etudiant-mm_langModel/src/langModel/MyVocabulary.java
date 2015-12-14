@@ -8,7 +8,7 @@ import java.util.TreeSet;
 /**
  * Class MyVocabulary: class implementing the interface Vocabulary.
  * 
- * @author ... (2015)
+ * @author Cédric Berland & Nathan Maraval (2015)
  *
  */
 public class MyVocabulary implements Vocabulary {

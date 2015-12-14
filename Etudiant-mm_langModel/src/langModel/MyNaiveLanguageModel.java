@@ -5,7 +5,7 @@ package langModel;
  * Class MyNaiveLanguageModel: class implementing the interface LanguageModel by creating a naive language model,
  * i.e. a n-gram language model with no smoothing.
  * 
- * @author ... (2015)
+ * @author Cédric Berland & Nathan Maraval (2015)
  *
  */
 public class MyNaiveLanguageModel implements LanguageModel {

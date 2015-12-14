@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * Class NgramUtil: class containing useful functions to deal with n-grams.
  * 
- * @author N. Hernandez and S. Quiniou (2015)
+ * @author Cédric Berland & Nathan Maraval (2015)
  *
  */
 public class NgramUtil {

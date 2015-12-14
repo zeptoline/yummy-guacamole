@@ -2,7 +2,6 @@ package langReco.reco;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Set;
 
 import langModel.MyLaplaceLanguageModel;
@@ -62,7 +61,7 @@ public class MyLanguageRecognizer2 extends LanguageRecognizer{
 			}
 		}
 		
-		double seuil = 0.0000001;
+		//double seuil = 0.0000001;
 		System.out.println("ResProb : " + maxProb );
 		//resProb / minProb doit être petit pour unknown
 		//Attention, plus la phrase est grande, plus resProb / minProb est grand
