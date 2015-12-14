@@ -28,23 +28,40 @@ public class MyNaiveLanguageModel implements LanguageModel {
 		vocabulary = new MyVocabulary();
 	}
 	
-
+	/**
+	 * Setter for the ngram count
+	 * Make the vocabulary read the new ngram set
+	 * @param ngramCounts The new Ngram Count
+	 */
 	@Override
 	public void setNgramCounts(NgramCounts ngramCounts) {
 		this.ngramCounts = ngramCounts;
 		vocabulary.scanNgramSet(ngramCounts.getNgrams());
 	}
 
+	/**
+	 * Give the Maximal Order of the N-gram Count
+	 * @return the Maximal Order
+	 */
 	@Override
 	public int getLMOrder() {
 		return ngramCounts.getMaximalOrder();
 	}
 
+	/**
+	 * Give the number of every different words
+	 * @return the size of the vocabulary
+	 */
 	@Override
 	public int getVocabularySize() {
 		return vocabulary.getSize();
 	}
 
+	/**
+	 * Calculate the probability of a single n-gram
+	 * @param ngram The n-gram to consider
+	 * @return A float giving the probability of the ngram
+	 */
 	@Override
 	public Double getNgramProb(String ngram) {
 		Double nepnep = 0.0;
@@ -70,6 +87,11 @@ public class MyNaiveLanguageModel implements LanguageModel {
 		return nepnep;
 	}
 
+	/**
+	 * Cut the sentence in ngram and calculate the probability for each, and then multiply all of them
+	 * @param sentence The sentence to consider
+	 * @return the probability of the whole sentence
+	 */
 	@Override
 	public Double getSentenceProb(String sentence) {
 		double mult = 1;

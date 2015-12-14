@@ -54,31 +54,52 @@ public class MyNgramCounts implements NgramCounts {
 		this.order = order;
 	}
 
-	
+	/**
+	 * Getter of the Maximal Order of the ngrams
+	 * 
+	 * @return the maximal order of n-grams
+	 */
 	@Override
 	public int getMaximalOrder() {
 		return this.order;
 	}
 
-	
+	/**
+	 * Give the numbers of n-grams
+	 * 
+	 * @return the numbers of n-grams
+	 */
 	@Override
 	public int getNgramCounterSize() {
 		return ngramCounts.size();
 	}
 
-	
+	/**
+	 * Give the total number of words, in all n-grams
+	 * 
+	 * @return the total number of words in all n-grams
+	 */
 	@Override
 	public int getTotalWordNumber(){
 		return nbWordsTotal;
 	}
 	
-	
+	/**
+	 * Returns all the n-grams
+	 * 
+	 * @return Returns all the n-grams
+	 */
 	@Override
 	public Set<String> getNgrams() {
 		return ngramCounts.keySet();
 	}
 
-	
+	/**
+	 * Return the occurence of the n-gram
+	 * 
+	 * @param ngram The n-gram to be counted
+	 * @return the counts of the n-gram
+	 */
 	@Override
 	public int getCounts(String ngram) {
 		if (ngramCounts.containsKey(ngram)) 
@@ -86,7 +107,11 @@ public class MyNgramCounts implements NgramCounts {
 		return 0;
 	}
 	
-
+	/**
+	 * Add a new n-gram, or add to the number of occurence 
+	 * 
+	 * @param ngram The n-gram to add
+	 */
 	@Override
 	public void incCounts(String ngram) {
 		ngramCounts.put(ngram, new Integer(getCounts(ngram)+1));
@@ -94,7 +119,12 @@ public class MyNgramCounts implements NgramCounts {
 			nbWordsTotal ++;
 	}
 
-	
+	/**
+	 * Change the count/occurence of a given n-gram
+	 * 
+	 * @param ngram The n-gram to be changed
+	 * @param counts The new counts of the n-gram
+	 */
 	@Override
 	public void setCounts(String ngram, int counts) {
 		ngramCounts.put(ngram, new Integer(counts));
@@ -102,10 +132,16 @@ public class MyNgramCounts implements NgramCounts {
 			nbWordsTotal += counts;
 	}
 
-
+	/**
+	 * Read a String and add it's value to the Map of n-gram
+	 * 
+	 * @param text The String to be read (can have multiple n-gram seperated by a line-break)
+	 * @param maximalOrder The new maximal Order of the n-gram
+	 */
 	@Override
 	public void scanTextString(String text, int maximalOrder) {
-		setMaximalOrder(maximalOrder);
+		if(maximalOrder > getMaximalOrder())
+			setMaximalOrder(maximalOrder);
 		String[] sentences = text.split("\\n");
 		for (String sentence : sentences) {
 			List<String> ngramList = NgramUtil.generateNgrams(sentence, 1, getMaximalOrder());
@@ -114,10 +150,16 @@ public class MyNgramCounts implements NgramCounts {
 		}
 	}
 
-	
+	/**
+	 * Read a file and add it's value to the Map of n-gram
+	 * 
+	 * @param filePath The file to be read (can have multiple n-gram seperated by a line-break)
+	 * @param maximalOrder The new maximal Order of the n-gram
+	 */
 	@Override
 	public void scanTextFile(String filePath, int maximalOrder) {
-		setMaximalOrder(maximalOrder);
+		if(maximalOrder > getMaximalOrder())
+			setMaximalOrder(maximalOrder);
 		List<String> sentences = MiscUtil.readTextFileAsStringList(filePath);
 		for (String sentence : sentences) {
 			List<String> ngramList = NgramUtil.generateNgrams(sentence, 1, getMaximalOrder());
@@ -126,7 +168,10 @@ public class MyNgramCounts implements NgramCounts {
 		}
 	}
 
-	
+	/**
+	 * Write the HashMap of n-gram to a file
+	 * @param filePath the path to the file to be written
+	 */
 	@Override
 	public void writeNgramCountFile(String filePath) {
 		StringBuffer ngramCountStringBuffer = new StringBuffer();
@@ -143,8 +188,13 @@ public class MyNgramCounts implements NgramCounts {
 		
 		MiscUtil.writeFile(ngramCountStringBuffer.toString(), filePath, false);
 	}
-
 	
+
+	/**
+	 * Read a file and add it's value to the Map of n-gram. The maximal order is not given, so a condition is made to get it.
+	 * 
+	 * @param filePath The file to be read (can have multiple n-gram seperated by a line-break)
+	 */
 	@Override
 	public void readNgramCountsFile(String filePath) {
 		List<String> ngramCountList = MiscUtil.readTextFileAsStringList(filePath);
