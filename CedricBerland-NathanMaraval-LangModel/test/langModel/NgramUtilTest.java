@@ -28,6 +28,7 @@ import org.junit.rules.TestName;
  * @author N. Hernandez and S. Quiniou (2015)
  *
  */
+@SuppressWarnings("unused")
 public class NgramUtilTest {
 	String sentence = "<s> cette phrase est de taille 9 . </s>";
 	String ngram = "où commence l' historique de cet n-gramme";
