@@ -17,6 +17,7 @@ import langModel.NgramCounts;
  * @author hernandez-n
  *
  */
+@SuppressWarnings("unused")
 public class LanguageModelsEstimatorTest {
 
 	/**

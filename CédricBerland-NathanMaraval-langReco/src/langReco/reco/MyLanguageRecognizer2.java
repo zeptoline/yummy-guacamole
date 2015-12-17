@@ -1,6 +1,5 @@
 package langReco.reco;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Set;
 
@@ -18,26 +17,11 @@ public class MyLanguageRecognizer2 extends LanguageRecognizer{
 		for (String l : this.getLang()) {
 			MyLaplaceLanguageModel lm = new MyLaplaceLanguageModel();
 			MyNgramCounts ngCounts = new MyNgramCounts();
-			
-			//LinkedList<String> nGram = new LinkedList<String>(this.getNgramCountPath(l));
-			//System.out.println("l : " + l + ", " +  nGram);
-			
-			ArrayList<String>nGram = new ArrayList<String>();
-			nGram.add("cs");
-			nGram.add("de");
-			nGram.add("en");
-			nGram.add("es");
-			nGram.add("et");
-			nGram.add("it");
-			nGram.add("lv");
-			nGram.add("nl");
-			nGram.add("pt");
-			nGram.add("sk");
-			nGram.add("unk");
-			
-			for (String path :  nGram) {
+			for (String path : getNgramCountPath(l)) {
+				
 				ngCounts.readNgramCountsFile(path);
-			} //Y faudrait faire au cas où y a plusieurs modèles par langues
+			}
+			
 			lm.setNgramCounts(ngCounts);
 			lms.put(l, lm);
 		}
@@ -62,15 +46,16 @@ public class MyLanguageRecognizer2 extends LanguageRecognizer{
 		}
 		
 		//double seuil = 0.0000001;
-		System.out.println("ResProb : " + maxProb );
+		//System.out.println("ResProb : " + maxProb );
 		//resProb / minProb doit être petit pour unknown
 		//Attention, plus la phrase est grande, plus resProb / minProb est grand
-		if ((minProb * 100) / maxProb < 20)
-			resLang = "unk";
+		//if ((minProb * 100) / maxProb < 20)
+		//	resLang = "unk";
 		
-		
-		System.out.println("LMOrder : " + lms.get(resLang).getLMOrder());
-		System.out.println("NgramProb : " + lms.get(resLang).getNgramProb(sentence));
+		if(!resLang.equals("unk")) {
+			System.out.println("LMOrder : " + lms.get(resLang).getLMOrder());
+			System.out.println("NgramProb : " + lms.get(resLang).getNgramProb(sentence));
+		}
 		
 		return resLang;
 	}
