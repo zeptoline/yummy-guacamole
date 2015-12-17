@@ -5,15 +5,23 @@ import java.util.Set;
 
 import langModel.MyLaplaceLanguageModel;
 import langModel.MyNgramCounts;
+import langModel.NgramUtil;
 
 public class MyLanguageRecognizer2 extends LanguageRecognizer{
 	HashMap<String, MyLaplaceLanguageModel> lms = new HashMap<String, MyLaplaceLanguageModel>(); 
 	
+	
+	/**
+	 * Constructeur de MyLanguageRecognizer2
+	 * Initialise lms avec les langues en clé, et des languages de modéles prets en valeurs
+	 * @param nGramPath qui indique le chemin vers le fichier de config
+	 */
 	public MyLanguageRecognizer2(String nGramPath){
 		super();
+		//charger le fichier de config pour avoir le chemin de chaque langue
 		this.loadNgramCountPath4Lang(nGramPath);
 		
-		
+		//boucle où l'on associe chaque language à un modèle de langage dans lms
 		for (String l : this.getLang()) {
 			MyLaplaceLanguageModel lm = new MyLaplaceLanguageModel();
 			MyNgramCounts ngCounts = new MyNgramCounts();
@@ -27,66 +35,40 @@ public class MyLanguageRecognizer2 extends LanguageRecognizer{
 		}
 	}
 	
+	/**
+	 * Méthode qui donne la langue estimé pour une phrase donnée
+	 * @param sentence qui est la phrase dont on cherche la langue
+	 * @return la langue qui obtient la plus haute probabilité, ou unk si on estime que la langue est inconnue
+	 */
 	@Override
 	public String recognizeSentenceLanguage(String sentence) {
-		/*
+
+		//liste de toutes les langues à tester
 		Set<String> lmsKeys = lms.keySet();
-		//System.out.println("test : " + lms.keySet());
-		double maxProb = 0, minProb = 1;
-		String resLang = null;
+		
+		//On considére de base que la langue est inconnue
+		String lang = "unk";
+		double probaMax = 0;
+		double proba = 0;
+		int length = NgramUtil.getSequenceSize(sentence);
+
+		//On teste pour toutes les langues
 		for (String l : lmsKeys) {
-			//System.out.println("lang : " + l + ", prob : " + lms.get(l).getSentenceProb(sentence));
-			if (lms.get(l).getSentenceProb(sentence) > maxProb) {
-				maxProb = lms.get(l).getSentenceProb(sentence);
-				resLang = l;
-			}
-			if (lms.get(l).getSentenceProb(sentence) < minProb) {
-				minProb = lms.get(l).getSentenceProb(sentence);
+
+			proba = lms.get(l).getSentenceProb(sentence);
+			double sizeVoca = lms.get(l).getVocabularySize();
+			
+			//seuil à dépasser pour considérer que la langue n'est pas inconnue
+			double seuil = Math.pow((1/sizeVoca), length)*10000;
+
+			if(proba >= seuil){
+				if(probaMax < proba){
+					probaMax = proba;
+					lang = l;
+				}
 			}
 		}
-		
-		//double seuil = 0.0000001;
-		//System.out.println("ResProb : " + maxProb );
-		//resProb / minProb doit Ãªtre petit pour unknown
-		//Attention, plus la phrase est grande, plus resProb / minProb est grand
-		//if ((minProb * 100) / maxProb < 20)
-		//	resLang = "unk";
-		
-		if(!resLang.equals("unk")) {
-			System.out.println("LMOrder : " + lms.get(resLang).getLMOrder());
-			System.out.println("NgramProb : " + lms.get(resLang).getNgramProb(sentence));
-		}
-		
-		return resLang;*/
-		
-		 Set<String> lmsKeys = lms.keySet();
-	        
-	        String lang = "unk";
-	        double probaMax = 0;
-	        double proba = 0;
-	        int sentLen = sentence.split("\\s+").length;
-	        double pow3 = Math.pow(10, 3);
-
-	        for (String l : lmsKeys) {
-	            
-	            proba = lms.get(l).getSentenceProb(sentence);
-	            double vocaS = lms.get(l).getVocabularySize();
-	            double borneU = Math.pow((1/vocaS), sentLen)*pow3;
-	            double borneD = Math.pow((1/vocaS), sentLen);
-
-	            if(!(borneD <= proba && proba <= borneU)){
-	                if(probaMax < proba){
-	                    probaMax = proba;
-	                    lang = l;
-	                }
-	            }
-	        }
-
-	        System.out.println("phrase : "+sentence);
-	        System.out.println("langue : "+lang);
-	        System.out.println("res : "+proba);
-	        
-	        return lang;
+		return lang;
 	}
-	
+
 }

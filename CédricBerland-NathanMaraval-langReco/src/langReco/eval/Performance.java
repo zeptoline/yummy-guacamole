@@ -54,8 +54,8 @@ public class Performance {
 		for (int i = 0 ; i < goldLang.size() ; i++ ) {
 			if (goldLang.get(i).equalsIgnoreCase(hypLang.get(i))) 
 				correct++;
-			//System.out.println(goldLang.get(i) + " (=== ?)" + hypLang.get(i));
-			//System.out.println((i / goldLang.size()) +"%");
+			if(!goldLang.get(i).equals(hypLang.get(i))) 
+				System.out.println(goldLang.get(i) + " (=/=)" + hypLang.get(i));
 		}
 		return (double) correct/ goldLang.size();	
 	}
