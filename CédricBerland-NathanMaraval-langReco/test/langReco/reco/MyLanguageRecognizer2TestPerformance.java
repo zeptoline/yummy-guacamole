@@ -21,16 +21,16 @@ public class MyLanguageRecognizer2TestPerformance {
 
 	@Test
 	public void testBaselineLanguageRecognizer() {
-		String goldSentPath = "data/gold/gold-sent2.txt";
-		String goldLangPath = "data/gold/gold-lang2.txt";
+		String goldSentPath = "data/gold/gold-sent.txt";
+		String goldLangPath = "data/gold/gold-lang.txt";
 
 		List<String> lang = new ArrayList<String>();
 		/*lang.add("fr");
 		lang.add("en");*/
 		
+			
 		
-		
-		MyLanguageRecognizer2 baseline = new MyLanguageRecognizer2("lm/fichConfig_bigram-100.txt");
+		MyLanguageRecognizer2 baseline = new MyLanguageRecognizer2("lm/myFishConfig_bigram-100.txt");
 		//baseline.loadNgramCountPath4Lang("lm/fichConfig_bigram-100.txt");
 		// or use the following if you want to consider all the languages
 		// LanguageRecognizer baseline = new BaselineLanguageRecognizer();

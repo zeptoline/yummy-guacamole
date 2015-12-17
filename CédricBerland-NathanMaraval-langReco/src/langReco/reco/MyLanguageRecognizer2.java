@@ -29,7 +29,7 @@ public class MyLanguageRecognizer2 extends LanguageRecognizer{
 	
 	@Override
 	public String recognizeSentenceLanguage(String sentence) {
-		
+		/*
 		Set<String> lmsKeys = lms.keySet();
 		//System.out.println("test : " + lms.keySet());
 		double maxProb = 0, minProb = 1;
@@ -57,7 +57,36 @@ public class MyLanguageRecognizer2 extends LanguageRecognizer{
 			System.out.println("NgramProb : " + lms.get(resLang).getNgramProb(sentence));
 		}
 		
-		return resLang;
+		return resLang;*/
+		
+		 Set<String> lmsKeys = lms.keySet();
+	        
+	        String lang = "unk";
+	        double probaMax = 0;
+	        double proba = 0;
+	        int sentLen = sentence.split("\\s+").length;
+	        double pow3 = Math.pow(10, 3);
+
+	        for (String l : lmsKeys) {
+	            
+	            proba = lms.get(l).getSentenceProb(sentence);
+	            double vocaS = lms.get(l).getVocabularySize();
+	            double borneU = Math.pow((1/vocaS), sentLen)*pow3;
+	            double borneD = Math.pow((1/vocaS), sentLen);
+
+	            if(!(borneD <= proba && proba <= borneU)){
+	                if(probaMax < proba){
+	                    probaMax = proba;
+	                    lang = l;
+	                }
+	            }
+	        }
+
+	        System.out.println("phrase : "+sentence);
+	        System.out.println("langue : "+lang);
+	        System.out.println("res : "+proba);
+	        
+	        return lang;
 	}
 	
 }
