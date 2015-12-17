@@ -16,8 +16,11 @@ public class MyLanguageRecognizer2 extends LanguageRecognizer{
 	 * Initialise lms avec les langues en clé, et des languages de modéles prets en valeurs
 	 * @param nGramPath qui indique le chemin vers le fichier de config
 	 */
-	public MyLanguageRecognizer2(String nGramPath){
+	public MyLanguageRecognizer2(){
 		super();
+		
+		
+		String nGramPath = "lm/myFishConfig_bigram-100.txt";
 		//charger le fichier de config pour avoir le chemin de chaque langue
 		this.loadNgramCountPath4Lang(nGramPath);
 		

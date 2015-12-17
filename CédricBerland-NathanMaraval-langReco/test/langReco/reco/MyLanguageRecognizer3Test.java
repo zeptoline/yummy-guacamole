@@ -14,26 +14,17 @@ import org.junit.Test;
 import org.junit.rules.TestName;
 
 @SuppressWarnings("unused")
-public class MyLanguageRecognizer2TestPerformance {
+public class MyLanguageRecognizer3Test {
 
-	public MyLanguageRecognizer2TestPerformance() {
+	public MyLanguageRecognizer3Test() {
 	}
 
 	@Test
 	public void testBaselineLanguageRecognizer() {
 		String goldSentPath = "data/gold/gold-sent.txt";
 		String goldLangPath = "data/gold/gold-lang.txt";
-
-		List<String> lang = new ArrayList<String>();
-		/*lang.add("fr");
-		lang.add("en");*/
 		
-			
-		
-		MyLanguageRecognizer2 baseline = new MyLanguageRecognizer2("lm/myFishConfig_bigram-100.txt");
-		//baseline.loadNgramCountPath4Lang("lm/fichConfig_bigram-100.txt");
-		// or use the following if you want to consider all the languages
-		// LanguageRecognizer baseline = new BaselineLanguageRecognizer();
+		MyLanguageRecognizer3 baseline = new MyLanguageRecognizer3();
 
 		String hypLangFilePath = "data/test/hyp";
 		baseline.recognizeFileLanguage(goldSentPath, hypLangFilePath);

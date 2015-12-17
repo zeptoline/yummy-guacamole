@@ -5,8 +5,9 @@ import java.util.Set;
 
 import langModel.MyLaplaceLanguageModel;
 import langModel.MyNgramCounts;
+import langModel.NgramUtil;
 
-public class MyLanguageRecognizer1 extends LanguageRecognizer{
+public class MyLanguageRecognizer3 extends LanguageRecognizer{
 	HashMap<String, MyLaplaceLanguageModel> lms = new HashMap<String, MyLaplaceLanguageModel>(); 
 	
 	
@@ -15,10 +16,11 @@ public class MyLanguageRecognizer1 extends LanguageRecognizer{
 	 * Initialise lms avec les langues en clé, et des languages de modéles prets en valeurs
 	 * @param nGramPath qui indique le chemin vers le fichier de config
 	 */
-	public MyLanguageRecognizer1(){
+	public MyLanguageRecognizer3(){
 		super();
-		String nGramPath = "lm/myFishConfig_bigram-100.txt";
 		
+		
+		String nGramPath = "lm/myFishConfig_unigram-100.txt";
 		//charger le fichier de config pour avoir le chemin de chaque langue
 		this.loadNgramCountPath4Lang(nGramPath);
 		
@@ -46,21 +48,29 @@ public class MyLanguageRecognizer1 extends LanguageRecognizer{
 
 		//liste de toutes les langues à tester
 		Set<String> lmsKeys = lms.keySet();
-
+		
 		//On considére de base que la langue est inconnue
-		String lang = "";
+		String lang = "unk";
 		double probaMax = 0;
 		double proba = 0;
+		int length = NgramUtil.getSequenceSize(sentence);
 
 		//On teste pour toutes les langues
 		for (String l : lmsKeys) {
+
 			proba = lms.get(l).getSentenceProb(sentence);
-			if(probaMax < proba){
-				probaMax = proba;
-				lang = l;
+			double sizeVoca = lms.get(l).getVocabularySize();
+			
+			//seuil à dépasser pour considérer que la langue n'est pas inconnue
+			double seuil = Math.pow((1/sizeVoca), length)*10000;
+
+			if(proba >= seuil){
+				if(probaMax < proba){
+					probaMax = proba;
+					lang = l;
+				}
 			}
 		}
-
 		return lang;
 	}
 

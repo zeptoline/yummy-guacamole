@@ -1,28 +1,23 @@
-package langReco.reco;
+package langReco.train;
 
 import langModel.MiscUtil;
 import langModel.MyNgramCounts;
 
-public class generateLangModel {
+public class LanguageModelEstimator {
 
 	public static void creerNgram(String data, String lg, int order){
 		String destination = "";
-		String ngramS = "";
 		switch (order) {
 		case 1:
-			ngramS = "uni";
 			destination = "lm/unigram/unigram-"+lg+".lm";
 			break;
 		case 2:
-			ngramS = "bi";
 			destination = "lm/bigram/bigram-"+lg+".lm";
 			break;
 		case 3:
-			ngramS = "tri";
 			destination = "lm/trigram/trigram-"+lg+".lm";
 			break;
 		case 4:
-			ngramS = "quadri";
 			destination = "lm/quadrigram/quadrigram-"+lg+".lm";
 			break;
 		}
@@ -31,10 +26,31 @@ public class generateLangModel {
 		ngram.scanTextFile(data, order);
 		ngram.writeNgramCountFile(destination);
 		
-		MiscUtil.writeFile(lg+" "+lg+"_"+ngramS+" lm/"+ngramS+"gram/"+ngramS+"gram-"+lg+".lm\n", "lm/myFishConfig_"+ngramS+"gram-100.txt", true);
 	}
-
-
+	
+	
+	public static void creerConfig(String lg, int order){
+		String ngramS = "";
+		switch (order) {
+		case 1:
+			ngramS = "uni";
+			break;
+		case 2:
+			ngramS = "bi";
+			break;
+		case 3:
+			ngramS = "tri";
+			break;
+		case 4:
+			ngramS = "quadri";
+			break;
+		}
+		
+		MiscUtil.writeFile(lg+" "+lg+"_"+ngramS+" lm/"+ngramS+"gram/"+ngramS+"gram-"+lg+".lm\n", "lm/myFishConfig_"+ngramS+"gram-100.txt", true);
+		
+	}
+	
+	
 	public static void main(String[] args) {
 		String dataEn = "data/train/train-en.txt";
 		String dataDe = "data/train/train-de.txt";
@@ -64,9 +80,13 @@ public class generateLangModel {
 		for (int i = 0; i < lg.length; i++) {
 			System.out.println(i + " " + (lg.length - 1));
 			creerNgram(data[i], lg[i], 1);
+			creerConfig(lg[i], 1);
 			creerNgram(data[i], lg[i], 2);
+			creerConfig(lg[i], 2);
 			creerNgram(data[i], lg[i], 3);
+			creerConfig(lg[i], 3);
 			creerNgram(data[i], lg[i], 4);
+			creerConfig(lg[i], 4);
 		}
 	}
 }

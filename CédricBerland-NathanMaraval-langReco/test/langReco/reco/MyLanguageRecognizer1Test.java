@@ -2,28 +2,43 @@ package langReco.reco;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import langReco.eval.Performance;
+
 import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 
+@SuppressWarnings("unused")
 public class MyLanguageRecognizer1Test {
 
 	public MyLanguageRecognizer1Test() {
 	}
 
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
 	@Test
-	public void testRecognizeSentenceLanguage() {
-		MyLanguageRecognizer1 lr = new MyLanguageRecognizer1("lm/fichConfig_bigram-100.txt");
-		lr.loadNgramCountPath4Lang("lm/fichConfig_bigram-100.txt");
-		assertEquals(lr.recognizeSentenceLanguage("<s> the vote in accordance </s>"), "en");
+	public void testBaselineLanguageRecognizer() {
+		String goldSentPath = "data/gold/gold-sent.txt";
+		String goldLangPath = "data/gold/gold-lang.txt";
+
+		MyLanguageRecognizer1 baseline = new MyLanguageRecognizer1();
+
+		String hypLangFilePath = "data/test/hyp";
+		baseline.recognizeFileLanguage(goldSentPath, hypLangFilePath);
+		System.out.printf("System performance = %f\n", Performance.evaluate(goldLangPath, hypLangFilePath));
 	}
 
+
+	@Rule
+	public TestName name = new TestName();
+
+	
+	@Before
+	public void printSeparator()
+	{
+		System.out.println("\n=== " + name.getMethodName() + " =====================");
+	}
 }

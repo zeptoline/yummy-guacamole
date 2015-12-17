@@ -27,8 +27,9 @@ public class LanguageModelsEstimatorTest {
 	 */
 	@Test
 	public void testCreateLmWordLangEnOrder3() {
+
+		LanguageModelEstimator.creerNgram("data/train/train-en.txt", "en", 3);
 		
-		// TODO			
 	}
 
 

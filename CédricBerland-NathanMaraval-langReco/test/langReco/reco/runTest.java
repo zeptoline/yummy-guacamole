@@ -14,21 +14,27 @@ import org.junit.Test;
 import org.junit.rules.TestName;
 
 @SuppressWarnings("unused")
-public class MyLanguageRecognizer2Test {
+public class runTest {
 
-	public MyLanguageRecognizer2Test() {
+	public runTest() {
 	}
 
 	@Test
 	public void testBaselineLanguageRecognizer() {
-		String goldSentPath = "data/gold/gold-sent.txt";
-		String goldLangPath = "data/gold/gold-lang.txt";
-		
-		MyLanguageRecognizer2 baseline = new MyLanguageRecognizer2();
+		String goldSentPath = "data/gold/test-sent.txt";
+		String hypLangFilePath1 = "runs/test-lang-hyp1.txt";
+		String hypLangFilePath2 = "runs/test-lang-hyp2.txt";
 
-		String hypLangFilePath = "data/test/hyp";
-		baseline.recognizeFileLanguage(goldSentPath, hypLangFilePath);
-		System.out.printf("System performance = %f\n", Performance.evaluate(goldLangPath, hypLangFilePath));
+		
+		MyLanguageRecognizer2 baseline1 = new MyLanguageRecognizer2();
+		MyLanguageRecognizer3 baseline2 = new MyLanguageRecognizer3();
+
+		
+		baseline1.recognizeFileLanguage(goldSentPath, hypLangFilePath1);
+		baseline2.recognizeFileLanguage(goldSentPath, hypLangFilePath2);
+		
+		
+	
 	}
 
 
